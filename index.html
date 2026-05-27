@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Warung Bahagia 🍔☕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #FFF8EE;
+      --warm: #FFF0D6;
+      --orange: #FF6B2B;
+      --orange-deep: #E85520;
+      --green: #2ECC71;
+      --green-dark: #27AE60;
+      --brown: #5C3D1E;
+      --yellow: #FFD166;
+      --red: #E63946;
+      --white: #FFFFFF;
+      --shadow: 0 8px 32px rgba(92,61,30,0.13);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--brown);
+      overflow-x: hidden;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #FF6B2B 0%, #FFD166 50%, #2ECC71 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px 60px;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .hero-badge {
+      background: var(--white);
+      color: var(--orange);
+      font-weight: 900;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      border-radius: 50px;
+      margin-bottom: 18px;
+      display: inline-block;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+      animation: fadeDown 0.7s ease both;
+    }
+
+    .hero-logo {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(3rem, 10vw, 6rem);
+      color: var(--white);
+      text-shadow: 4px 6px 0 rgba(0,0,0,0.15);
+      line-height: 1.1;
+      animation: fadeDown 0.8s 0.1s ease both;
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 3vw, 1.35rem);
+      color: rgba(255,255,255,0.92);
+      font-weight: 700;
+      margin: 14px 0 30px;
+      animation: fadeDown 0.8s 0.2s ease both;
+    }
+
+    .hero-emojis {
+      font-size: 2.2rem;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 36px;
+      animation: fadeDown 0.8s 0.3s ease both;
+    }
+
+    .hero-emojis span {
+      display: inline-block;
+      animation: bounce 2s infinite;
+    }
+    .hero-emojis span:nth-child(2) { animation-delay: 0.2s; }
+    .hero-emojis span:nth-child(3) { animation-delay: 0.4s; }
+    .hero-emojis span:nth-child(4) { animation-delay: 0.6s; }
+    .hero-emojis span:nth-child(5) { animation-delay: 0.8s; }
+
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: var(--white);
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 900;
+      padding: 16px 38px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 28px rgba(46,204,113,0.45);
+      transition: all 0.2s;
+      animation: fadeDown 0.8s 0.4s ease both;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-wa:hover {
+      background: var(--green-dark);
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 12px 36px rgba(46,204,113,0.5);
+    }
+
+    .wa-icon { width: 26px; height: 26px; }
+
+    /* WAVE */
+    .wave {
+      display: block;
+      width: 100%;
+      margin-top: -2px;
+    }
+
+    /* SECTION */
+    section { padding: 60px 20px; }
+
+    .section-title {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      color: var(--orange);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .section-sub {
+      text-align: center;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--brown);
+      opacity: 0.7;
+      margin-bottom: 40px;
+    }
+
+    /* MENU GRID */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .menu-card {
+      background: var(--white);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: transform 0.22s, box-shadow 0.22s;
+      cursor: pointer;
+      position: relative;
+    }
+    .menu-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 18px 48px rgba(92,61,30,0.18);
+    }
+
+    .card-emoji-bg {
+      background: var(--warm);
+      font-size: 4.5rem;
+      text-align: center;
+      padding: 28px 20px 20px;
+      position: relative;
+    }
+
+    .card-tag {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 50px;
+      color: var(--white);
+    }
+    .tag-hot { background: var(--red); }
+    .tag-fresh { background: var(--green); }
+    .tag-fav { background: var(--orange); }
+
+    .card-body { padding: 20px 22px 22px; }
+
+    .card-title {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.25rem;
+      color: var(--brown);
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 0.93rem;
+      color: #7a5c3e;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .card-price {
+      display: inline-block;
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--orange);
+    }
+
+    .card-order-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      float: right;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 0.85rem;
+      font-weight: 800;
+      padding: 8px 18px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .card-order-btn:hover {
+      background: var(--orange-deep);
+      transform: scale(1.05);
+    }
+
+    /* ABOUT */
+    .about-section {
+      background: linear-gradient(135deg, #5C3D1E 0%, #8B5E2E 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 70px 24px;
+    }
+    .about-section .section-title { color: var(--yellow); }
+    .about-section .section-sub { color: rgba(255,255,255,0.75); opacity: 1; }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .about-card {
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 20px;
+      padding: 26px 20px;
+      transition: background 0.2s;
+    }
+    .about-card:hover { background: rgba(255,255,255,0.17); }
+
+    .about-card .ico { font-size: 2.6rem; margin-bottom: 10px; }
+    .about-card h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 5px; }
+    .about-card p { font-size: 0.85rem; opacity: 0.8; line-height: 1.5; }
+
+    /* FOOTER / CTA */
+    .cta-section {
+      background: var(--orange);
+      text-align: center;
+      padding: 70px 24px;
+    }
+
+    .cta-section h2 {
+      font-family: 'Pacifico', cursive;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+
+    .cta-section p {
+      color: rgba(255,255,255,0.9);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 32px;
+    }
+
+    .btn-wa-big {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--white);
+      color: var(--green-dark);
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      padding: 18px 44px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      transition: all 0.22s;
+    }
+    .btn-wa-big:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.22);
+    }
+
+    .footer {
+      background: var(--brown);
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      padding: 22px 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+    .footer span { color: var(--yellow); }
+
+    /* FLOATING WA */
+    .float-wa {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      background: var(--green);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 24px rgba(46,204,113,0.5);
+      text-decoration: none;
+      animation: pulse 2.5s infinite;
+      transition: transform 0.2s;
+    }
+    .float-wa:hover { transform: scale(1.12); }
+    .float-wa svg { width: 32px; height: 32px; fill: white; }
+
+    /* ANIMATIONS */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 6px 24px rgba(46,204,113,0.5); }
+      50%       { box-shadow: 0 6px 36px rgba(46,204,113,0.85); }
+    }
+
+    .menu-card { animation: fadeCard 0.6s ease both; }
+    .menu-card:nth-child(1) { animation-delay: 0.1s; }
+    .menu-card:nth-child(2) { animation-delay: 0.2s; }
+    .menu-card:nth-child(3) { animation-delay: 0.3s; }
+    .menu-card:nth-child(4) { animation-delay: 0.4s; }
+    .menu-card:nth-child(5) { animation-delay: 0.5s; }
+    .menu-card:nth-child(6) { animation-delay: 0.6s; }
+    @keyframes fadeCard {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .hero-logo { font-size: 3rem; }
+      .card-body { padding: 16px 16px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🏠 Warung Hits Langganan Banyak</div>
+  <h1 class="hero-logo">Warung Bahagia</h1>
+  <p class="hero-sub">Makan enak, harga bersahabat, bikin happy!</p>
+  <div class="hero-emojis">
+    <span>☕</span><span>🧊</span><span>🍔</span><span>🍗</span><span>🍜</span>
+  </div>
+  <a href="https://wa.me/6285394921813?text=Halo%20Warung%20Bahagia%2C%20saya%20mau%20pesan%20ya!" class="btn-wa" target="_blank">
+    <svg class="wa-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="16" fill="#25D366"/>
+      <path d="M23.5 8.5C21.6 6.6 19.1 5.5 16.4 5.5C10.9 5.5 6.4 10 6.4 15.5C6.4 17.3 6.9 19.1 7.8 20.7L6.3 26L11.7 24.5C13.3 25.3 15 25.8 16.8 25.8H16.8C22.3 25.8 26.8 21.3 26.8 15.8C26.6 13.1 25.4 10.4 23.5 8.5ZM16.4 24C14.8 24 13.2 23.6 11.8 22.8L11.5 22.6L8.6 23.4L9.4 20.6L9.2 20.2C8.3 18.8 7.9 17.1 7.9 15.4C7.9 10.8 11.7 7 16.4 7C18.7 7 20.8 7.9 22.4 9.5C24 11.1 24.9 13.2 24.9 15.5C25.1 20.3 21.2 24 16.4 24ZM21.2 17.7C20.9 17.5 19.5 16.9 19.3 16.8C19.1 16.7 18.9 16.7 18.8 16.9C18.6 17.2 18.1 17.7 18 17.9C17.9 18.1 17.7 18.1 17.5 18C16.2 17.4 15.3 16.9 14.4 15.5C14.2 15.1 14.7 15.2 15.1 14.3C15.2 14.2 15.1 14 15.1 13.9C15 13.7 14.4 12.4 14.2 11.9C14 11.4 13.7 11.4 13.5 11.4H13.1C12.9 11.4 12.6 11.5 12.4 11.7C12.2 11.9 11.5 12.6 11.5 13.9C11.5 15.2 12.4 16.5 12.5 16.7C12.6 16.8 14.4 19.5 17.1 20.7C18.8 21.4 19.5 21.5 20.4 21.3C21 21.2 22.1 20.6 22.4 19.9C22.6 19.2 22.6 18.6 22.5 18.5C22.4 18.1 22.1 17.9 21.2 17.7Z" fill="white"/>
+    </svg>
+    Pesan via WhatsApp
+  </a>
+</section>
+
+<svg class="wave" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#FFF8EE"/>
+</svg>
+
+<!-- MENU -->
+<section id="menu">
+  <h2 class="section-title">Menu Andalan ✨</h2>
+  <p class="section-sub">Semua dibuat fresh, pesan langsung gas!</p>
+
+  <div class="menu-grid">
+
+    <!-- Es Kopi Susu -->
+    <div class="menu-card">
+      <div class="card-emoji-bg">
+        ☕🧊
+        <span class="card-tag tag-fav">Favorit</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Es Kopi Susu</div>
+        <p class="card-desc">Perpaduan espresso bold dengan susu fresh yang creamy, disajikan dingin dengan es batu besar. Bikin semangat seharian!</p>
+        <a class="card-order-btn" href="https://wa.me/6285394921813?text=Halo%20Warung%20Bahagia%2C%20saya%20mau%20pesan%20Es%20Kopi%20Susu!" target="_blank">🛒 Pesan</a>
+        <span class="card-price">Mulai 8k</span>
+      </div>
+    </div>
+
+    <!-- Minuman Dingin -->
+    <div class="menu-card">
+      <div class="card-emoji-bg">
+        🥤🍹
+        <span class="card-tag tag-fresh">Segar</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Minuman Dingin Seger</div>
+        <p class="card-desc">Dari es teh manis, es jeruk peras, hingga minuman kekinian dingin yang nyegerin tenggorokan. Cocok buat hari panas!</p>
+        <a class="card-order-btn" href="https://wa.me/6285394921813?text=Halo%20Warung%20Bahagia%2C%20saya%20mau%20pesan%20Minuman%20Dingin!" target="_blank">🛒 Pesan</a>
+        <span class="card-price">Mulai 5k</span>
+      </div>
+    </div>
+
+    <!-- Burger Juicy -->
+    <div class="menu-card">
+      <div class="card-emoji-bg">
+        🍔🔥
+        <span class="card-tag tag-hot">Hot!</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Burger Juicy</div>
+        <p class="card-desc">Patty daging juicy, saus spesial warung, selada segar, tomat, keju meleleh. Digigit sekali langsung nagih!</p>
+        <a class="card-order-btn" href="https://wa.me/6285394921813?text=Halo%20Warung%20Bahagia%2C%20saya%20mau%20pesan%20Burger%20Juicy!" target="_blank">🛒 Pesan</a>
+        <span class="card-price">Mulai 15k</span>
+      </div>
+    </div>
+
+    <!-- Paket Ayam -->
+    <div class="menu-card">
+      <div class="card-emoji-bg">
+        🍗🍚
+        <span class="card-tag tag-hot">Hits</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Paket Ayam Blackpepper + Nasi</div>
+        <p class="card-desc">Ayam goreng bumbu blackpepper pedas gurih, disajikan dengan nasi putih pulen hangat. Makan siang paling mantap!</p>
+        <a class="card-order-btn" href="https://wa.me/6285394921813?text=Halo%20Warung%20Bahagia%2C%20saya%20mau%20pesan%20Paket%20Ayam%20Blackpepper!" target="_blank">🛒 Pesan</a>
+        <span class="card-price">Mulai 18k</span>
+      </div>
+    </div>
+
+    <!-- Indomie -->
+    <div class="menu-card">
+      <div class="card-emoji-bg">
+        🍜🥚
+        <span class="card-tag tag-fav">Klasik</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Indomie Spesial</div>
+        <p class="card-desc">Indomie goreng / rebus dengan topping telur, kerupuk, dan sambal. Sesederhana itu tapi selalu bikin happy!</p>
+        <a class="card-order-btn" href="https://wa.me/6285394921813?text=Halo%20Warung%20Bahagia%2C%20saya%20mau%20pesan%20Indomie!" target="_blank">🛒 Pesan</a>
+        <span class="card-price">Mulai 8k</span>
+      </div>
+    </div>
+
+    <!-- Cemilan -->
+    <div class="menu-card">
+      <div class="card-emoji-bg">
+        🍟🧆
+        <span class="card-tag tag-fresh">Santuy</span>
+      </div>
+      <div class="card-body">
+        <div class="card-title">Cemilan Santuy</div>
+        <p class="card-desc">Dari kentang goreng crispy, pisang coklat keju, cireng isi, hingga gorengan hangat. Ngemil bareng temen makin seru!</p>
+        <a class="card-order-btn" href="https://wa.me/6285394921813?text=Halo%20Warung%20Bahagia%2C%20saya%20mau%20pesan%20Cemilan%20Santuy!" target="_blank">🛒 Pesan</a>
+        <span class="card-price">Mulai 5k</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section">
+  <h2 class="section-title">Kenapa Warung Bahagia? 💛</h2>
+  <p class="section-sub">Lebih dari sekedar warung, ini tempat ngumpul yang bikin bahagia</p>
+  <div class="about-grid">
+    <div class="about-card">
+      <div class="ico">🕐</div>
+      <h3>Buka Tiap Hari</h3>
+      <p>Siap melayani dari pagi sampai malam. Kapanpun lapar, kita ada!</p>
+    </div>
+    <div class="about-card">
+      <div class="ico">💰</div>
+      <h3>Harga Friendly</h3>
+      <p>Porsi kenyang, harga nggak bikin nangis. Dompet aman, perut happy!</p>
+    </div>
+    <div class="about-card">
+      <div class="ico">🌿</div>
+      <h3>Bahan Segar</h3>
+      <p>Bahan dipilih setiap hari, dimasak fresh untuk kamu!</p>
+    </div>
+    <div class="about-card">
+      <div class="ico">🚀</div>
+      <h3>Pesan Cepat</h3>
+      <p>Order via WhatsApp, langsung diproses. Nggak ribet, nggak lama!</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2>Lapar? Langsung Order!</h2>
+  <p>Chat WhatsApp kami sekarang, pesananmu langsung diproses 🔥</p>
+  <a href="https://wa.me/6285394921813?text=Halo%20Warung%20Bahagia%2C%20saya%20mau%20pesan%20makanan!" class="btn-wa-big" target="_blank">
+    <svg viewBox="0 0 32 32" width="28" height="28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16" cy="16" r="16" fill="#25D366"/>
+      <path d="M23.5 8.5C21.6 6.6 19.1 5.5 16.4 5.5C10.9 5.5 6.4 10 6.4 15.5C6.4 17.3 6.9 19.1 7.8 20.7L6.3 26L11.7 24.5C13.3 25.3 15 25.8 16.8 25.8H16.8C22.3 25.8 26.8 21.3 26.8 15.8C26.6 13.1 25.4 10.4 23.5 8.5ZM16.4 24C14.8 24 13.2 23.6 11.8 22.8L11.5 22.6L8.6 23.4L9.4 20.6L9.2 20.2C8.3 18.8 7.9 17.1 7.9 15.4C7.9 10.8 11.7 7 16.4 7C18.7 7 20.8 7.9 22.4 9.5C24 11.1 24.9 13.2 24.9 15.5C25.1 20.3 21.2 24 16.4 24ZM21.2 17.7C20.9 17.5 19.5 16.9 19.3 16.8C19.1 16.7 18.9 16.7 18.8 16.9C18.6 17.2 18.1 17.7 18 17.9C17.9 18.1 17.7 18.1 17.5 18C16.2 17.4 15.3 16.9 14.4 15.5C14.2 15.1 14.7 15.2 15.1 14.3C15.2 14.2 15.1 14 15.1 13.9C15 13.7 14.4 12.4 14.2 11.9C14 11.4 13.7 11.4 13.5 11.4H13.1C12.9 11.4 12.6 11.5 12.4 11.7C12.2 11.9 11.5 12.6 11.5 13.9C11.5 15.2 12.4 16.5 12.5 16.7C12.6 16.8 14.4 19.5 17.1 20.7C18.8 21.4 19.5 21.5 20.4 21.3C21 21.2 22.1 20.6 22.4 19.9C22.6 19.2 22.6 18.6 22.5 18.5C22.4 18.1 22.1 17.9 21.2 17.7Z" fill="white"/>
+    </svg>
+    Chat WhatsApp Sekarang
+  </a>
+</section>
+
+<footer class="footer">
+  © 2025 <span>Warung Bahagia</span> — Dibuat dengan ❤️ buat pelanggan setia kami
+</footer>
+
+<!-- Floating WhatsApp -->
+<a class="float-wa" href="https://wa.me/6285394921813?text=Halo%20Warung%20Bahagia%2C%20saya%20mau%20pesan!" target="_blank" title="Chat WhatsApp">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <path d="M23.5 8.5C21.6 6.6 19.1 5.5 16.4 5.5C10.9 5.5 6.4 10 6.4 15.5C6.4 17.3 6.9 19.1 7.8 20.7L6.3 26L11.7 24.5C13.3 25.3 15 25.8 16.8 25.8H16.8C22.3 25.8 26.8 21.3 26.8 15.8C26.6 13.1 25.4 10.4 23.5 8.5ZM16.4 24C14.8 24 13.2 23.6 11.8 22.8L11.5 22.6L8.6 23.4L9.4 20.6L9.2 20.2C8.3 18.8 7.9 17.1 7.9 15.4C7.9 10.8 11.7 7 16.4 7C18.7 7 20.8 7.9 22.4 9.5C24 11.1 24.9 13.2 24.9 15.5C25.1 20.3 21.2 24 16.4 24ZM21.2 17.7C20.9 17.5 19.5 16.9 19.3 16.8C19.1 16.7 18.9 16.7 18.8 16.9C18.6 17.2 18.1 17.7 18 17.9C17.9 18.1 17.7 18.1 17.5 18C16.2 17.4 15.3 16.9 14.4 15.5C14.2 15.1 14.7 15.2 15.1 14.3C15.2 14.2 15.1 14 15.1 13.9C15 13.7 14.4 12.4 14.2 11.9C14 11.4 13.7 11.4 13.5 11.4H13.1C12.9 11.4 12.6 11.5 12.4 11.7C12.2 11.9 11.5 12.6 11.5 13.9C11.5 15.2 12.4 16.5 12.5 16.7C12.6 16.8 14.4 19.5 17.1 20.7C18.8 21.4 19.5 21.5 20.4 21.3C21 21.2 22.1 20.6 22.4 19.9C22.6 19.2 22.6 18.6 22.5 18.5C22.4 18.1 22.1 17.9 21.2 17.7Z"/>
+  </svg>
+</a>
+
+</body>
+  </html>
+  
